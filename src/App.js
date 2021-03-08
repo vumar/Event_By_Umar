@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignIn from "./Pages/SignIn";
@@ -6,51 +6,43 @@ import LogIn from "./Pages/LogIn";
 import HomePage from "./Pages/HomePage";
 import NavBar from "./Pages/NavBar";
 import CreateEvent from "./Pages/CreateEvent";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
-  const [ShowHomePage, setShowHomePage] = useState(false);
-  const [ShowLogInPage, setShowLogInPage] = useState(false);
-  const [ShowSignUpPage, setShowSignUppage] = useState(true);
-  const [Event, setEvent] = useState(false);
+  const [isAuthenticated, setisAuthenticated] = useState(false);
 
-  const HomePageFn = () => {
-    setShowHomePage(true);
-    setShowLogInPage(false);
-    setShowSignUppage(false);
-    setEvent(false);
-  };
-  const SignUpFn = () => {
-    setShowHomePage(false);
-    setShowLogInPage(false);
-    setShowSignUppage(true);
-    setEvent(false);
-  };
-  const LogInFn = () => {
-    setShowHomePage(false);
-    setShowLogInPage(true);
-    setShowSignUppage(false);
-    setEvent(false);
-  };
-  const CreateEventFn = () => {
-    setShowHomePage(false);
-    setShowLogInPage(false);
-    setShowSignUppage(false);
-    setEvent(true);
-  };
+  useEffect(() => {
+    console.log("isAuth:", isAuthenticated);
+  });
+
   return (
     <div className="App">
-      <NavBar
-        clickLogInButton={LogInFn}
-        clickSignUpButton={SignUpFn}
-        clickHomePageLogo={HomePageFn}
-        LogOutButton={Event}
-      />
-      {ShowSignUpPage && <SignIn clickLogInButton={LogInFn} />}
-      {ShowLogInPage && (
-        <LogIn EventPage={CreateEventFn} clickHomePageLogo={HomePageFn} />
-      )}
-      {ShowHomePage && <HomePage />}
-      {Event && <CreateEvent onHome={HomePageFn} />}
+      <NavBar isAuth={isAuthenticated} abcd={setisAuthenticated} />
+      <Switch>
+        <Route
+          path="/signup"
+          render={() => {
+            if (isAuthenticated) return <Redirect to="/create_event" />;
+            else return <SignIn props />;
+          }}
+        />
+        <Route
+          path="/login"
+          render={(props) => {
+            if (isAuthenticated) return <Redirect to="/create_event" />;
+            else return <LogIn {...props} authenticate={setisAuthenticated} />;
+          }}
+        />
+        <Route
+          path="/create_event"
+          render={(props) => {
+            // return <CreateEvent props />;
+            if (isAuthenticated) return <CreateEvent props />;
+            else return <HomePage props />;
+          }}
+        />
+        <Route path="/" component={HomePage} />
+      </Switch>
     </div>
   );
 }

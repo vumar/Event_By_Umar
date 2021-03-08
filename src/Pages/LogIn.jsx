@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function LogIn({ EventPage, clickSignUpButton }) {
+// props={history:(),autheticate:()}
+// const {history,authenticate}=props
+
+function LogIn({ history, authenticate }) {
+  console.log(history);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,10 +23,11 @@ function LogIn({ EventPage, clickSignUpButton }) {
       .then((res) => {
         console.log("login Sucess", res.data.token);
         localStorage.setItem("token", res.data.token);
-        EventPage();
+        history.replace("/create_event");
+        authenticate(true);
       })
       .catch((err) => {
-        console.log("Login Failed", JSON.stringify(err.response.data.error));
+        console.log("Login Failed", JSON.stringify(err.response));
       });
   };
 
@@ -66,7 +71,7 @@ function LogIn({ EventPage, clickSignUpButton }) {
 
           <p className="fs-6 mt-4">
             Don't have an account ?
-            <a onClick={() => clickSignUpButton()}>Register Here</a>
+            <a onClick={() => history.replace("/signup")}>Register Here</a>
           </p>
         </div>
       </div>
