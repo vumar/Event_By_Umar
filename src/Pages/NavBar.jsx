@@ -1,22 +1,20 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
-function NavBar({
-  clickHomePageLogo,
-  clickLogInButton,
-  clickSignUpButton,
-  LogOutButton,
-}) {
+function NavBar({ isAuth, abcd }) {
+  const history = useHistory();
+
   return (
     <div>
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" onClick={() => clickHomePageLogo()}>
+          <a class="navbar-brand" onClick={() => history.push("/")}>
             Navbar
           </a>
-          {LogOutButton ? (
+          {isAuth ? (
             <button
               class="btn btn-outline-success "
-              onClick={() => clickLogInButton()}
+              onClick={() => abcd(false)}
             >
               Log Out
             </button>
@@ -24,13 +22,13 @@ function NavBar({
             <div class="d-flex">
               <button
                 class="btn btn-outline-success "
-                onClick={() => clickSignUpButton()}
+                onClick={() => history.push("/signup")}
               >
                 Sign Up
               </button>
               <button
                 class="btn btn-outline-success me-2"
-                onClick={() => clickLogInButton()}
+                onClick={() => history.push("/login")}
               >
                 Log In
               </button>

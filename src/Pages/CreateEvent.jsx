@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function CreateEvent({ onHome }) {
+function CreateEvent({ history, onHome }) {
   const [category, setCategory] = useState("");
   const [eventName, setEventName] = useState("");
   const [eventLocation, setEventLocation] = useState("");
@@ -34,8 +34,8 @@ function CreateEvent({ onHome }) {
         }
       )
       .then((res) => {
-        console.log("login Sucess", res);
-        onHome();
+        console.log("Event Created ", res);
+        history.replace("/");
       })
       .catch((err) => {
         console.log("Failed", JSON.stringify(err.response.data.msg));
