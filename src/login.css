@@ -1,0 +1,101 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+}
+.maindiv,
+.event_card {
+  width: 350px;
+  height: 400px;
+  background-color: #ffb429;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 15px;
+  text-align: center;
+}
+.event_card {
+  height: 500px;
+  margin-top: 50px;
+  width: 320px;
+}
+.login,
+.signin,
+.event {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.signin,
+.event {
+  padding-bottom: 30px;
+}
+.input-1 {
+  background: #ffb429;
+  /* background-color: transparent; */
+  /* background: transparent; */
+  border: none;
+  margin-bottom: 10px;
+  border-bottom: solid black 1px;
+  height: 35px;
+  width: 250px;
+  /* border-radius: 10px; */
+  outline: none;
+  margin-bottom: 20px;
+}
+
+.submit_btn,
+.event_btn,
+.event_create {
+  width: 250px;
+  background-color: transparent;
+  color: white;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+.submit_btn,
+.event_btn,
+.event_create:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+.event_create {
+  margin: 20px 40%;
+}
+
+.account {
+  margin-top: 30px;
+}
+.Register {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #ffb429;
+}
+.fas {
+  color: black;
+  cursor: pointer;
+}
+.checkbox {
+  background: transparent;
+  color: white;
+}
+
+.button {
+  background-color: transparent;
+  color: white;
+  border-radius: 10px;
+  margin-left: 10px;
+  /* padding-left: 10px; */
+  /* padding-right: 10px; */
+  border: 2px;
+}
+.button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
